@@ -80,21 +80,32 @@ class _BuildCardState extends State<_BuildCard> {
     String _image = widget.character.thumbnail.path + '/portrait_medium.' +
         widget.character.thumbnail.extension;
     _image = _image.replaceAll('http', 'https');
-    return Card(
-      child: ListTile(
-        onTap: () => widget.onClick(),
-        leading: Image.network(widget.character.thumbnail.getImageMedium()),
-        title: Text(
-          widget.character.name,
-          style: TextStyle(
-            fontSize: 24.0,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        subtitle: Text(
-          widget.character.description,
-          style: TextStyle(
-            fontSize: 16.0,
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: SizedBox(
+        width: 100.0,
+        height: 150.0,
+        child: Card(
+          child: Container(
+            color: Colors.black54,
+            child: ListTile(
+              onTap: () => widget.onClick(),
+              leading: Image.network(widget.character.thumbnail.getImageLarge()),
+              title: Text(
+                widget.character.name,
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 24.0,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              subtitle: Text(
+                widget.character.description,
+                style: TextStyle(
+                  fontSize: 16.0,
+                ),
+              ),
+            ),
           ),
         ),
       ),
