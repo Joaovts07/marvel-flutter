@@ -30,7 +30,7 @@ class Data {
     total = json['total'];
     count = json['count'];
     if (json['results'] != null) {
-      characters = new List<Character>();
+      characters = <Character>[];
       json['results'].forEach((v) {
         characters.add(new Character.fromJson(v));
       });
@@ -87,8 +87,8 @@ class Thumbnail {
     extension = json['extension'];
   }
 
-  getImageMedium() {
-    return path.replaceAll('http', 'https') + '/portrait_medium.' + extension;
+  getImageLarge() {
+    return path.replaceAll('http', 'https') + '/portrait_small.' + extension;
   }
 
   Map<String, dynamic> toJson() {
