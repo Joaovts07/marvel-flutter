@@ -19,7 +19,6 @@ class _CaracterLisState extends State<CaracterList> {
       appBar: AppBar(
         title: Text('Characters Marvel'),
       ),
-
       body: FutureBuilder<CharactersResponse>(
         future: _webClient.getCaracters().catchError((onError) {
           print(onError);
@@ -41,7 +40,7 @@ class _CaracterLisState extends State<CaracterList> {
                   return ListView.builder(
                     itemBuilder: (context, index) {
                       final Character character =
-                      characters.data.characters[index];
+                          characters.data.characters[index];
                       return _BuildCard(
                         context,
                         character,
@@ -77,37 +76,45 @@ class _BuildCard extends StatefulWidget {
 class _BuildCardState extends State<_BuildCard> {
   @override
   Widget build(BuildContext context) {
-    String _image = widget.character.thumbnail.path + '/portrait_medium.' +
+    String _image = widget.character.thumbnail.path +
+        '/portrait_medium.' +
         widget.character.thumbnail.extension;
     _image = _image.replaceAll('http', 'https');
     return Padding(
       padding: const EdgeInsets.all(8.0),
-      child: SizedBox(
-        width: 100.0,
-        height: 150.0,
-        child: Card(
-          child: Container(
-            color: Colors.black54,
-            child: ListTile(
-              onTap: () => widget.onClick(),
-              leading: Image.network(widget.character.thumbnail.getImageLarge()),
-              title: Text(
-                widget.character.name,
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 24.0,
-                  fontWeight: FontWeight.bold,
+      child: Stack(
+        children: [
+          Card(
+            child: Container(
+              color: Colors.black54,
+              child: ListTile(
+                onTap: () => widget.onClick(),
+                title: Center(
+                  child: Text(
+                    widget.character.name,
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 16.0,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
                 ),
-              ),
-              subtitle: Text(
-                widget.character.description,
-                style: TextStyle(
-                  fontSize: 16.0,
+                subtitle: Center(
+                  child: Text(
+                    widget.character.description,
+                    style: TextStyle(
+                      fontSize: 14.0,
+                    ),
+                  ),
                 ),
               ),
             ),
           ),
-        ),
+          Padding(
+            padding: const EdgeInsets.only(left:16.0),
+            child: Image.network(widget.character.thumbnail.getImageLarge()),
+          ),
+        ],
       ),
     );
   }
